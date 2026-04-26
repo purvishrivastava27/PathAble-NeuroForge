@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "BlindAssist"
+version = "1.0.0"
+id = "artifacts/blindassist"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23313
+
+[services.development]
+run = "pnpm --filter @workspace/blindassist run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/blindassist", "run", "build" ]
+publicDir = "artifacts/blindassist/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23313"
+BASE_PATH = "/"

@@ -1,0 +1,200 @@
+## 🌐 Build Full-Stack Assistive Navigation Web App (BlindAssist)
+
+### 🎯 Goal
+
+Build a **real-time web application** that helps visually impaired users navigate safely using:
+
+* Webcam-based obstacle detection
+* Action-based guidance (left/right/stop)
+* Voice feedback
+* Google Maps navigation
+* Emergency alert system
+
+---
+
+## ⚙️ Tech Stack (STRICT — DO NOT CHANGE)
+
+### Frontend:
+
+* HTML
+* CSS
+* JavaScript (vanilla)
+
+### Backend:
+
+* Python + FastAPI
+
+### AI / ML:
+
+* OpenCV OR lightweight TensorFlow model
+
+### APIs:
+
+* Web Speech API (Text-to-Speech)
+* Browser Geolocation API
+* Google Maps JavaScript API
+* Google Directions API
+
+❌ Do NOT use:
+
+* React / Angular
+* Firebase / Node.js
+* Heavy ML models
+
+---
+
+## 🧠 Core Requirement (VERY IMPORTANT)
+
+Implement **real-time video processing with throttling**:
+
+* Use webcam via `getUserMedia`
+* Capture frames continuously
+* Send frames to backend `/detect`
+* Process ONLY every **300 milliseconds**
+* Use:
+
+  * timestamp-based throttling OR
+  * boolean flag
+
+Ensure:
+
+* Smooth UI
+* No lag
+
+---
+
+## 📷 Camera + Backend Flow
+
+Frontend:
+
+* Capture video frame (canvas)
+* Convert to base64
+* Send via POST request
+
+Backend:
+
+* Receive image
+* Run object detection
+* Return:
+
+  * object label
+  * bounding box (x, y, width, height)
+
+---
+
+## 🧠 Decision Logic
+
+Divide screen into:
+
+LEFT | CENTER | RIGHT
+
+Rules:
+
+* Object in CENTER → "Move Right"
+* Object in LEFT → "Move Right"
+* Object in RIGHT → "Move Left"
+* Object very close → "STOP"
+* No object → "Move Forward"
+
+Implement logic in frontend or backend.
+
+---
+
+## 🔊 Voice Output
+
+Frontend:
+
+* Use `speechSynthesis`
+* Speak instructions
+* Avoid repeating same message frequently
+
+---
+
+## 📍 Location System
+
+* Use browser geolocation API
+* Get current location coordinates
+
+---
+
+## 🗺️ Maps Integration
+
+* Load Google Maps JS API using API key
+* Input destination field
+* Use Directions API to draw route
+
+---
+
+## 🚨 Emergency System
+
+* Button: "Emergency"
+
+On click:
+
+* Get user location
+* Send to backend `/emergency`
+* Backend logs alert
+* Open dialer using `tel:` link (optional)
+
+---
+
+## 🧩 Backend (FastAPI)
+
+Create:
+
+### `/detect`
+
+* Input: image
+* Output: object + bounding box
+
+### `/emergency`
+
+* Input: location
+* Output: success message
+
+---
+
+## 📦 Output Required
+
+Generate full project:
+
+### Frontend:
+
+* index.html
+* style.css
+* script.js
+
+### Backend:
+
+* main.py (FastAPI)
+* requirements.txt
+
+Include:
+
+* camera handling
+* API integration
+* throttling logic
+* decision engine
+* voice system
+* maps integration
+
+---
+
+## ⚠️ Constraints
+
+* Must run smoothly in browser
+* Lightweight and fast
+* Clean, readable code
+* Hackathon-ready
+
+---
+
+## 🎯 Final Note
+
+Focus on:
+
+* real-time performance
+* accessibility
+* working prototype
+
+This is an assistive AI system, not just a UI demo.
